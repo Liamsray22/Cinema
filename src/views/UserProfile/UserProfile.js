@@ -12,6 +12,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import ModalAsientos from "components/ModalAsientos/ModalAsientos.js";
 
 import avatar from "assets/img/faces/marc.jpg";
 
@@ -38,6 +39,15 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div>
       <GridContainer>
@@ -117,11 +127,12 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Asiento"
                     id="asiento"
-                    fn= {()=> alert("Modal de asientos")}
+                    fn= {handleOpen}
                     formControlProps={{
                       fullWidth: true
                     }}
                   />
+                  <ModalAsientos open={open} handleClose={handleClose}/>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput

@@ -40,7 +40,7 @@ const styles = {
 };
 
 const useStyles = makeStyles(styles);
-
+const currentDate = new Date();
 export default function TableList() {
   const classes = useStyles();
   return (
@@ -58,10 +58,10 @@ export default function TableList() {
               tableHeaderColor="primary"
               tableHead={["Nombre del cliente", "Id Cartelera", "Id del Ticket", "Id del Asiento","Fecha de registro","Forma de pago","Monto"]}
               tableData={[
-                ["Jose",2,2,"#5","10-12-2020","Efectivo","$2500"],
-                ["Jose",2,2,"#5","10-12-2020","Efectivo","$2500"],
-                ["Jose",2,2,"#5","10-12-2020","Efectivo","$2500"],
-                ["Jose",2,2,"#5","10-12-2020","Efectivo","$2500"],
+                ["Jose",2,2,"#5",`${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,"Efectivo","$2500"],
+                ["Jose",2,2,"#5",`${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,"Efectivo","$2500"],
+                ["Jose",2,2,"#5",`${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,"Efectivo","$2500"],
+                ["Jose",2,2,"#5",`${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,"Efectivo","$2500"],
               ]}
             />
           </CardBody>
