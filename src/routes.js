@@ -50,10 +50,10 @@ const dashboardRoutes = [
   //   layout: "/admin"
   // },
   {
-    path: "/user",
+    path: "/taquillas",
     name: "Taquillas",
     icon: ConfirmationNumberIcon,
-    component: UserProfile,
+    component:  TableList,
     layout: "/admin"
   },
   // {
@@ -67,21 +67,20 @@ const dashboardRoutes = [
   {
     path: "/dashboard",
     name: "Facturar Ticket",
-    rtlName: "قائمة الجدول",
     icon: ReceiptIcon,
-    component: TableList,
+    component: UserProfile,
     layout: "/admin"
   },
   {
-    path: "/table",
-    name: "Ver Facturas",
+    path: "/ver-facturas",
+    name: "Ventas",
     rtlName: "قائمة الجدول",
     icon: ListAltIcon,
     component: TableList,
     layout: "/admin"
   },
   {
-    path: "/table",
+    path: "/administracion",
     name: "Administracion",
     // rtlName: "قائمة الجدول",
     icon: "content_paste",

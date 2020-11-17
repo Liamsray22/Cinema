@@ -23,7 +23,8 @@ export default function CustomInput(props) {
     labelProps,
     inputProps,
     error,
-    success
+    success,
+    fn
   } = props;
 
   const labelClasses = classNames({
@@ -58,6 +59,7 @@ export default function CustomInput(props) {
           disabled: classes.disabled,
           underline: underlineClasses
         }}
+        onClick={fn}
         id={id}
         {...inputProps}
       />

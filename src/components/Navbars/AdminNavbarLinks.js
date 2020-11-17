@@ -50,6 +50,7 @@ export default function AdminNavbarLinks() {
   return (
     <div>
       <div className={classes.searchWrapper}>
+        {/* <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Coat_of_arms_of_the_Dominican_Republic.svg/270px-Coat_of_arms_of_the_Dominican_Republic.svg.png"/> */}
         <CustomInput
           formControlProps={{
             className: classes.margin + " " + classes.search

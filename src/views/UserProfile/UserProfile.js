@@ -41,17 +41,17 @@ export default function UserProfile() {
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-              <p className={classes.cardCategoryWhite}>Complete your profile</p>
+              <h4 className={classes.cardTitleWhite}>Facturar Taquilla</h4>
+              <p className={classes.cardCategoryWhite}>Complete los campos</p>
             </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
-                    labelText="Company (disabled)"
+                    labelText="E&J CINEMA"
                     id="company-disabled"
                     formControlProps={{
                       fullWidth: true
@@ -61,21 +61,24 @@ export default function UserProfile() {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                {/* <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Username"
+                    labelText="Nombre del Cliente"
                     id="username"
                     formControlProps={{
                       fullWidth: true
                     }}
                   />
-                </GridItem>
+                </GridItem> */}
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Email address"
-                    id="email-address"
+                    labelText="Calle Jose Contreras, Distrito Nacional"
+                    id="direccion"
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      disabled: true
                     }}
                   />
                 </GridItem>
@@ -83,8 +86,8 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="First Name"
-                    id="first-name"
+                    labelText="Nombre"
+                    id="nombre"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -92,8 +95,8 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Last Name"
-                    id="last-name"
+                    labelText="Apellido"
+                    id="apellido"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -101,10 +104,10 @@ export default function UserProfile() {
                 </GridItem>
               </GridContainer>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
+              <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="City"
-                    id="city"
+                    labelText="Cartelera"
+                    id="cartelera"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -112,8 +115,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Country"
-                    id="country"
+                    labelText="Asiento"
+                    id="asiento"
+                    fn= {()=> alert("Modal de asientos")}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -121,8 +125,17 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
-                    id="postal-code"
+                    labelText="Tipo de Pago"
+                    id="tipo-pago"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Monto"
+                    id="monto"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -131,8 +144,8 @@ export default function UserProfile() {
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                  <CustomInput
+                  {/* <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel> */}
+                  {/* <CustomInput
                     labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
                     id="about-me"
                     formControlProps={{
@@ -142,16 +155,16 @@ export default function UserProfile() {
                       multiline: true,
                       rows: 5
                     }}
-                  />
+                  /> */}
                 </GridItem>
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Update Profile</Button>
+              <Button color="primary">Procesar</Button>
             </CardFooter>
           </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+     
+        {/* <GridItem xs={12} sm={12} md={4}>
           <Card profile>
             <CardAvatar profile>
               <a href="#pablo" onClick={e => e.preventDefault()}>
@@ -171,7 +184,7 @@ export default function UserProfile() {
               </Button>
             </CardBody>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
     </div>
   );
