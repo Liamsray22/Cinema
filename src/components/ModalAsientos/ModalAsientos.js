@@ -34,9 +34,9 @@ export default function ModalAsientos(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
+      <h2 id="simple-modal-title">Asientos disponibles</h2>
       <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+        asientos...
       </p>
     </div>
   );
