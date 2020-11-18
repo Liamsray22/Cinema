@@ -29,6 +29,13 @@ const VentasState = (props) => {
     })
   }
   
+  // const editartFactura = (nuevaFactura)=>{
+  //   dispatch({
+  //     type: "EDITAR_FACTURA",
+  //     payload: nuevaFactura
+  //   })
+  // }
+
   return (
     <VentasContext.Provider
       value={{
@@ -36,7 +43,8 @@ const VentasState = (props) => {
         facturas: state.facturas,
         //Fn
         removerFactura,
-        obtenerFacturas
+        obtenerFacturas,
+        // editartFactura
       }}
     >
       {props.children}

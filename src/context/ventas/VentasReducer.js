@@ -15,5 +15,12 @@ export default (state, action) => {
       };
     default:
       return state;
+    // case "EDITAR_FACTURA":
+    //   return {
+    //     ...state,
+    //     facturas: state.facturas.map((factura) =>
+    //       factura[0] === action.payload[0] ? action.payload : factura
+    //     ),
+    //   };
   }
 };
