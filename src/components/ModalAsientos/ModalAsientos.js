@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {AsientosData} from '../Data/asientosData'
 import Modal from '@material-ui/core/Modal';
 
 function rand() {
@@ -36,7 +37,18 @@ export default function ModalAsientos(props) {
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Asientos disponibles</h2>
       <p id="simple-modal-description">
-        asientos...
+        <div style={{display:"flex", flexWrap:"wrap"}}>
+      {AsientosData.map((item,index)=>{
+        return(
+            <div>
+                <img src={item.img} style={{height:"50px", width:"50px"}}/>
+                <center><caption align="bottom">{item.numeroAsiento}</caption></center>
+                
+            </div>
+        )
+})
+    }
+    </div>
       </p>
     </div>
   );
