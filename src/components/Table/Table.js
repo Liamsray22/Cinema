@@ -9,6 +9,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
+// import Cell from './Cell'
 
 const useStyles = makeStyles(styles);
 
@@ -35,7 +36,15 @@ export default function CustomTable(props) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+        {/* {tableData? tableData.map((prop, key) => {
+            return (
+              <TableRow key={key} className={classes.tableBodyRow}>
+                    <Cell data={prop} key={key}/>
+              </TableRow>
+            );
+          }): <p>No hay ventas</p>} */}
+        
+          {tableData.length? tableData.map((prop, key) => {
             return (
               <TableRow key={key} className={classes.tableBodyRow}>
                 {prop.map((prop, key) => {
@@ -47,7 +56,8 @@ export default function CustomTable(props) {
                 })}
               </TableRow>
             );
-          })}
+          }): <p>No hay ventas</p>}
+      
         </TableBody>
       </Table>
     </div>

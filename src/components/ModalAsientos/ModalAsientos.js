@@ -41,9 +41,8 @@ export default function ModalAsientos(props) {
       {AsientosData.map((item,index)=>{
         return(
             <div>
-                <img src={item.img} style={{height:"50px", width:"50px"}}/>
+                <img key={index} src={item.img} style={{height:"50px", width:"50px"}} onClick={()=>alert(`Asiento Seleccionado: ${item.numeroAsiento}`)}/>
                 <center><caption align="bottom">{item.numeroAsiento}</caption></center>
-                
             </div>
         )
 })
