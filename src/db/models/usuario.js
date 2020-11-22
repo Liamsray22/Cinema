@@ -2,6 +2,9 @@ import * as nanoid from 'nanoid'
 
  const createUserModel = (db) => {
   return {
+    findMany(){
+      return db.get('usuario').value()
+    },
     findOne(id) {
       return db.get("user").filter((usuario)=> usuario[0] == id).value();
     },

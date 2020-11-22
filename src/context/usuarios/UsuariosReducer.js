@@ -3,16 +3,20 @@ export default (state, action) => {
     case "LOGEAR_USUARIO":
       return{
         ...state,
-        isAuth: !state.isAuth
+        usuarioLogueado: action.payload,
+        isAuth: true
       }
-    // case "REMOVER_FACTURA":
-    //   return {
-    //     ...state,
-    //     facturas: state.facturas.filter(
-    //       (factura) => factura[0] !== action.payload
-    //       ),
-    //     facturaSeleccionada: null,
-    //   };
+    case "OBTENER_USUARIOS":
+      return {
+        ...state,
+        usuarios: action.payload
+      };
+    case "DESLOGUEAR_USUARIO":
+      return {
+        ...state,
+        usuarioLogueado: null,
+        isAuth: false
+      }
     default:
       return state;
     // case "EDITAR_FACTURA":

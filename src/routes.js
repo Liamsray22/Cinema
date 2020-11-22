@@ -23,6 +23,7 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import UserProfile from "views/UserProfile/UserProfile.js";
 import TableList from "views/TableList/TableList.js";
 import Taquillas from "views/Taquillas/Taquillas.js";
+import Usuarios from 'views/Usuarios/Usuarios.js'
 
 
 const isAdmin = true
@@ -54,7 +55,7 @@ const dashboardRoutes = [
     path: "/administracion",
     name: "Administracion",
     icon: "content_paste",
-    component: TableList,
+    component: Usuarios,
     layout: "/admin"
   }
     :null

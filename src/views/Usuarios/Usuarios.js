@@ -1,16 +1,16 @@
-import React,{useContext,useEffect} from "react";
+import React,{useContext,useEffect} from 'react'
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 //Context
-import VentasContext from 'context/ventas/VentasContext'
+import UsuariosContext from 'context/usuarios/UsuariosContext'
 
 const styles = {
   cardCategoryWhite: {
@@ -43,37 +43,32 @@ const styles = {
 };
 
 const useStyles = makeStyles(styles);
-export default function TableList() {
+
+export default function Usuarios() {
   const classes = useStyles();
 
-  const ventasContext = useContext(VentasContext)
-  const {facturas,removerFactura,obtenerFacturas} = ventasContext;
-  
-  useEffect(()=>{
-    obtenerFacturas()
-  },[])
+  const usuariosContext = useContext(UsuariosContext)
+    
+    const {usuarios, obtenerUsuarios} = usuariosContext
+   
+    useEffect(()=>{
+        obtenerUsuarios()
+    },[])
 
-  const isAdmin = true
   return (
     <GridContainer>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Ventas</h4>
+            <h4 className={classes.cardTitleWhite}>Usuarios</h4>
             <p className={classes.cardCategoryWhite}>
-              Listado de ventas de taquillas
+              Listado de Usuarios
             </p>
           </CardHeader>
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Id","Nombre del cliente", "Id Cartelera", "Id del Ticket", "Id del Asiento","Fecha de registro","Forma de pago","Monto","Acciones"]}
-              tableData={facturas.map(factura => ([...factura,
-                isAdmin?
-                <> 
-                <Button color="primary" onClick={() =>removerFactura(factura[0])}>Eliminar</Button>
-                </>
-                :null
-             ]))}
+              tableHead={["ID", "Nombre de Usuario", "Password", "Rol"]}
+              tableData={usuarios}
             />
           </CardBody>
         </Card>

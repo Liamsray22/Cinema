@@ -5,26 +5,15 @@ import db from 'db'
 
 const UsuariosState = (props) => {
   const initialState = {
-    usuarios: [
-      [1,"admin","1234"],
-      [2,"Marcos","1234"],
-      [3,"Polo","1234"],
-      [4,"Julio","1234"],
-    ],
-    isAuth:true,
-    usuarioSeleccionado: null,
+    usuarios: [],
+    isAuth: true,
+    usuarioLogueado: null,
   };
 
   const [state, dispatch] = useReducer(UsuariosReducer, initialState);
 
-  const registrarUsuario = (usuario)=>{
-    dispatch({
-          type: "REGISTRAR_USUARIO",
-          payload: usuario
-        })
-  }
-
   const logearUsuario = (usuario)=>{
+    console.log('Sign In',usuario)
     dispatch({
       type: "LOGEAR_USUARIO",
       payload: usuario
@@ -32,26 +21,27 @@ const UsuariosState = (props) => {
   }
 
   const obtenerUsuarios = ()=>{
+    const usuarios = db.models.Usuario.findMany()
+    console.log("Get users",usuarios)
     dispatch({
-      type:"OBTENER_USUARIOS"
+      type:"OBTENER_USUARIOS",
+      payload: usuarios
     })
   }
 
-  const removerUsuario = (id)=>{
-    dispatch({
-      type: "REMOVER_USUARIO",
-      payload: id
-    })
-  }
+  // const removerUsuario = (id)=>{
+  //   dispatch({
+  //     type: "REMOVER_USUARIO",
+  //     payload: id
+  //   })
+  // }
 
-  const editarUsuario = (usuario)=>{
-      dispatch({
-      type: "EDITAR_USUARIO",
-      payload: usuario
-    })
-  }
-  
- 
+  // const editarUsuario = (usuario)=>{
+  //     dispatch({
+  //     type: "EDITAR_USUARIO",
+  //     payload: usuario
+  //   })
+  // }
 
   return (
     <UsuariosContext.Provider
@@ -61,7 +51,7 @@ const UsuariosState = (props) => {
         usuarios: state.usuarios,
         //Fn
         logearUsuario,
-        registrarUsuario,
+        obtenerUsuarios
       }}
     >
       {props.children}
