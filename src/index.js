@@ -21,7 +21,6 @@ const hist = createBrowserHistory();
 const App =()=>{
   const usuariosContext = useContext(UsuariosContext)
   const {isAuth}=usuariosContext 
-  // const isAuth = true
   
   return(
   <Router history={hist}>

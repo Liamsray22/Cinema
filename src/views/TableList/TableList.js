@@ -54,6 +54,7 @@ export default function TableList() {
   },[])
 
   console.log(facturas)
+  const isAdmin = true
   return (
     <GridContainer>
         <Card>
@@ -68,9 +69,12 @@ export default function TableList() {
               tableHeaderColor="primary"
               tableHead={["Id","Nombre del cliente", "Id Cartelera", "Id del Ticket", "Id del Asiento","Fecha de registro","Forma de pago","Monto","Acciones"]}
               tableData={facturas.map(factura => ([...factura,
-              <> 
-              <Button color="primary" onClick={() =>removerFactura(factura[0])}>Eliminar</Button>
-              </>]))}
+                isAdmin?
+                <> 
+                <Button color="primary" onClick={() =>removerFactura(factura[0])}>Eliminar</Button>
+                </>
+                :null
+             ]))}
             />
           </CardBody>
         </Card>

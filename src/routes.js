@@ -24,6 +24,9 @@ import UserProfile from "views/UserProfile/UserProfile.js";
 import TableList from "views/TableList/TableList.js";
 import Taquillas from "views/Taquillas/Taquillas.js";
 
+
+const isAdmin = true
+
 const dashboardRoutes = [
   {
     path: "/taquillas",
@@ -46,13 +49,17 @@ const dashboardRoutes = [
     component: TableList,
     layout: "/admin"
   },
+  isAdmin?
   {
     path: "/administracion",
     name: "Administracion",
     icon: "content_paste",
     component: TableList,
     layout: "/admin"
-  },
+  }
+    :null
 ];
+
+
 
 export default dashboardRoutes;

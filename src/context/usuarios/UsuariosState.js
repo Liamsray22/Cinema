@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
 import UsuariosContext from "./UsuariosContext";
 import UsuariosReducer from "./UsuariosReducer";
+import db from 'db'
 
-const currentDate = new Date();
 const UsuariosState = (props) => {
   const initialState = {
     usuarios: [
