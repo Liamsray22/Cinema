@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext,useEffect} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -43,14 +43,17 @@ const styles = {
 };
 
 const useStyles = makeStyles(styles);
-const currentDate = new Date();
 export default function TableList() {
   const classes = useStyles();
 
   const ventasContext = useContext(VentasContext)
-  const {facturas,removerFactura} = ventasContext;
+  const {facturas,removerFactura,obtenerFacturas} = ventasContext;
   
-  console.log(ventasContext);
+  useEffect(()=>{
+    obtenerFacturas()
+  },[])
+
+  console.log(facturas)
   return (
     <GridContainer>
         <Card>

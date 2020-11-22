@@ -1,0 +1,11 @@
+{
+  "user": {
+    "id": "string",
+    "username": "string",
+    "password": "string",
+    "role":"string"
+  },
+  "cartelera":{},
+  "ventas":{},
+  "sala":{}
+}

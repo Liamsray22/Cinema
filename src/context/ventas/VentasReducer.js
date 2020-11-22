@@ -3,7 +3,7 @@ export default (state, action) => {
     case "OBTENER_FACTURAS":
       return{
         ...state,
-        facturas: state.facturas
+        facturas: action.payload
       }
     case "REMOVER_FACTURA":
       return {
@@ -15,12 +15,5 @@ export default (state, action) => {
       };
     default:
       return state;
-    // case "EDITAR_FACTURA":
-    //   return {
-    //     ...state,
-    //     facturas: state.facturas.map((factura) =>
-    //       factura[0] === action.payload[0] ? action.payload : factura
-    //     ),
-    //   };
   }
 };

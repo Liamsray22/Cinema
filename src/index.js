@@ -14,13 +14,15 @@ import UsuariosProvider from './context/usuarios/UsuariosState'
 //contexts
 import UsuariosContext from './context/usuarios/UsuariosContext'
 
+import db from './db'
+
 const hist = createBrowserHistory();
 
 const App =()=>{
-  // const usuariosContext = useContext(UsuariosContext)
-  // const {isAuth}=usuariosContext 
-  const isAuth = true
-  // console.log(usuariosContext)
+  const usuariosContext = useContext(UsuariosContext)
+  const {isAuth}=usuariosContext 
+  // const isAuth = true
+  
   return(
   <Router history={hist}>
         <Switch>
@@ -28,7 +30,6 @@ const App =()=>{
           ? 
           <>
             <Route path="/admin" component={Admin} />
-            <Route path="/rtl" component={RTL} />
             <Redirect from="/" to="/admin/dashboard" />
           </>
           :
