@@ -11,7 +11,7 @@ import Login from "layouts/Login.js";
 import "assets/css/material-dashboard-react.css?v=1.9.0";
 
 const hist = createBrowserHistory();
-const user = false
+const user = true
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
