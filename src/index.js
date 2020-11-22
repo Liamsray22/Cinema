@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
@@ -7,25 +7,44 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Admin from "layouts/Admin.js";
 import RTL from "layouts/RTL.js";
 import Login from "layouts/Login.js";
-
 import "assets/css/material-dashboard-react.css?v=1.9.0";
+//Providers
+import VentasProvider from './context/ventas/VentasState'
+import UsuariosProvider from './context/usuarios/UsuariosState'
+//contexts
+import UsuariosContext from './context/usuarios/UsuariosContext'
 
 const hist = createBrowserHistory();
-const user = true
-ReactDOM.render(
+
+const App =()=>{
+  // const usuariosContext = useContext(UsuariosContext)
+  // const {isAuth}=usuariosContext 
+  const isAuth = true
+  // console.log(usuariosContext)
+  return(
   <Router history={hist}>
-    <Switch>
-      {user 
-      ? 
-      <>
-        <Route path="/admin" component={Admin} />
-        <Route path="/rtl" component={RTL} />
-        <Redirect from="/" to="/admin/dashboard" />
-      </>
-      :
-        <Login/>
-      }   
-    </Switch>
-  </Router>,
+        <Switch>
+          {isAuth 
+          ? 
+          <>
+            <Route path="/admin" component={Admin} />
+            <Route path="/rtl" component={RTL} />
+            <Redirect from="/" to="/admin/dashboard" />
+          </>
+          :
+            <Login/>
+          }   
+        </Switch>
+  </Router>
+  )
+}
+
+
+ReactDOM.render(
+  <UsuariosProvider>
+  <VentasProvider>
+  <App/>
+  </VentasProvider>
+  </UsuariosProvider>,
   document.getElementById("root")
 );

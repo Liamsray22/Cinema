@@ -5,7 +5,6 @@ var AsientosData = [];
                 numeroAsiento: i+1,
                 estado: "Desocupado",
                 img:"https://th.bing.com/th/id/OIP.wv99jY1NVrDxx6LpkRshugHaHa?pid=Api&rs=1"
-
        }
       AsientosData.push(asiento);
     } 

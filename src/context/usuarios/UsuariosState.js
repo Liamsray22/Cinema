@@ -6,7 +6,7 @@ const currentDate = new Date();
 const UsuariosState = (props) => {
   const initialState = {
     usuarios: [
-      [1,"Jose","1234"],
+      [1,"admin","1234"],
       [2,"Marcos","1234"],
       [3,"Polo","1234"],
       [4,"Julio","1234"],
@@ -51,12 +51,7 @@ const UsuariosState = (props) => {
     })
   }
   
-  // const editartFactura = (nuevaFactura)=>{
-  //   dispatch({
-  //     type: "EDITAR_FACTURA",
-  //     payload: nuevaFactura
-  //   })
-  // }
+ 
 
   return (
     <UsuariosContext.Provider

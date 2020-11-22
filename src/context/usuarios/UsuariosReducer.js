@@ -1,10 +1,10 @@
 export default (state, action) => {
   switch (action.type) {
-    // case "OBTENER_FACTURAS":
-    //   return{
-    //     ...state,
-    //     facturas: state.facturas
-    //   }
+    case "LOGEAR_USUARIO":
+      return{
+        ...state,
+        isAuth: !state.isAuth
+      }
     // case "REMOVER_FACTURA":
     //   return {
     //     ...state,
