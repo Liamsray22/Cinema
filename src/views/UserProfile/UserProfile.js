@@ -16,6 +16,8 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import ModalAsientos from "components/ModalAsientos/ModalAsientos.js";
 
+
+
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -37,13 +39,11 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-
-
 export default function UserProfile() {
   
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+ 
   const handleOpen = () => {
     setOpen(true);
   };

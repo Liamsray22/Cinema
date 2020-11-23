@@ -1,10 +1,13 @@
+import db from 'db'
+
 export default (state, action) => {
   switch (action.type) {
     case "LOGUEAR_USUARIO":
       return{
         ...state,
-        usuarioLogueado: action.payload,
+        usuarioLogueado: action.payload.usuario,
         isAuth: true,
+        isAdmin: false,
         error: false
       }
     case "OBTENER_USUARIOS":
@@ -13,10 +16,12 @@ export default (state, action) => {
         usuarios: action.payload
       };
     case "DESLOGUEAR_USUARIO":
+      //console.log(db.modals.Usuario.getLogged())
       return {
         ...state,
         usuarioLogueado: null,
-        isAuth: false
+        isAuth: false,
+        isAdmin: false
       }
     case "ERROR":
       return {

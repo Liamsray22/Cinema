@@ -8,23 +8,26 @@ const UsuariosState = (props) => {
     usuarios: [],
     isAuth: false,
     usuarioLogueado: null,
-    error: false
+    error: false,
+    isAdmin:null
   };
 
   const [state, dispatch] = useReducer(UsuariosReducer, initialState);
 
   const loguearUsuario = (usuario)=>{
     const usuarioLogged = db.models.Usuario.findOne(usuario)
-    console.log('Sign In',usuarioLogged)
-    
-    if(usuarioLogged.length == 0) {
-     return dispatch({
-      type: "ERROR",
-    })
+    console.log('Sign In',usuarioLogged.length ==0||usuarioLogged[0].length == 0)
+    if(usuarioLogged.length ==0||usuarioLogged[0].length == 0) {
+      return dispatch({
+        type: "ERROR",
+      })
     }  
     dispatch({
       type: "LOGUEAR_USUARIO",
-      payload: usuario
+      payload: {
+        usuario,
+        admin: true
+      }
     })
   }
 
@@ -35,10 +38,10 @@ const UsuariosState = (props) => {
   }
 
   const obtenerUsuarios = ()=>{
-    const usuarios = db.models.Usuario.findMany()
+    const resultado = db.models.Usuario.findMany()
     dispatch({
       type:"OBTENER_USUARIOS",
-      payload: usuarios
+      payload: resultado
     })
   }
 
@@ -61,6 +64,7 @@ const UsuariosState = (props) => {
       value={{
         //State
         isAuth: state.isAuth,
+        isAdmin: state.isAdmin,
         usuarios: state.usuarios,
         error: state.error,
         //Fn

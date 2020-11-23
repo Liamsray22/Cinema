@@ -1,12 +1,14 @@
 const currentDate = new Date();
 
 export default{
-  usuario:[ 
-    [1,"admin","1234","employee"],
-    [2,"Marcos","1234","employee"],
-    [3,"Polo","1234","employee"],
-    [4,"Julio","1234","employee"]
-  ],
+  usuarioLogueado:[],
+  usuario:
+    [
+      [1,"admin","1234","admin",true],
+      [2,"Marcos","1234","employee",false],
+      [3,"Polo","1234","employee",false],
+      [4,"Julio","1234","employee",false]
+    ],
   sala:[
     {  
       id:1,
@@ -38,12 +40,18 @@ export default{
         },
 
       ]
+    }, 
+    { id:3,
+      asientos:[]
     },
-    
+    { id:4,
+      asientos:[]
+    }
   ],
   cartelera:[
-    ["Terminator","28/08/2020","E&J CINEMA","2.5 horas","20:00","22:30",1],
-    ["Terminator","28/08/2020","E&J CINEMA","2.5 horas","20:00","22:30",2],
+    [1,"Terminator","28/11/2020","E&J CINEMA","2 horas","20:00","22:30",1],
+    [2,"Avengers","28/11/2020","E&J CINEMA","2 horas","20:00","22:30",2],
+    [3,"Black Panter","29/11/2020","E&J CINEMA","1 horas","20:00","22:30",2],
   ],
   factura:[
       [1,"Jose",2,2,"#5",`${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,"Efectivo","$2500"],

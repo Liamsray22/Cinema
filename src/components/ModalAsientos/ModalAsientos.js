@@ -45,8 +45,8 @@ export default function ModalAsientos(props) {
                 <center><caption align="bottom">{item.numeroAsiento}</caption></center>
             </div>
         )
-})
-    }
+        })
+      }
     </div>
       </p>
     </div>

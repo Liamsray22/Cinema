@@ -25,8 +25,7 @@ import TableList from "views/TableList/TableList.js";
 import Taquillas from "views/Taquillas/Taquillas.js";
 import Usuarios from 'views/Usuarios/Usuarios.js'
 
-
-const isAdmin = true
+const isAdmin =true
 
 const dashboardRoutes = [
   {

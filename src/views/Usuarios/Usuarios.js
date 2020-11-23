@@ -2,6 +2,7 @@ import React,{useContext,useEffect} from 'react'
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from '@material-ui/core';
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -11,6 +12,8 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 //Context
 import UsuariosContext from 'context/usuarios/UsuariosContext'
+
+import db from 'db'
 
 const styles = {
   cardCategoryWhite: {
@@ -50,6 +53,8 @@ export default function Usuarios() {
   const usuariosContext = useContext(UsuariosContext)
     
     const {usuarios, obtenerUsuarios} = usuariosContext
+
+    const isAdmin = db.models.Usuario.getLogged()[0][0][4]
    
     useEffect(()=>{
         obtenerUsuarios()
@@ -57,7 +62,7 @@ export default function Usuarios() {
 
   return (
     <GridContainer>
-        <Card>
+       {isAdmin?<Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Usuarios</h4>
             <p className={classes.cardCategoryWhite}>
@@ -72,6 +77,12 @@ export default function Usuarios() {
             />
           </CardBody>
         </Card>
+        : 
+        <Typography variant="h3" align="center" gutterBottom>
+          Necesitas permisos de administrador para acceder a esta vista
+        </Typography>
+      }
+        
     </GridContainer>
   );
 }

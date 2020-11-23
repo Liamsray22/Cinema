@@ -12,6 +12,8 @@ import CardBody from "components/Card/CardBody.js";
 //Context
 import VentasContext from 'context/ventas/VentasContext'
 
+import db from 'db'
+
 const styles = {
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {
@@ -53,7 +55,7 @@ export default function TableList() {
     obtenerFacturas()
   },[])
 
-  const isAdmin = true
+  const isAdmin = db.models.Usuario.getLogged()[0][0][4]
   return (
     <GridContainer>
         <Card>
@@ -66,7 +68,11 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Id","Nombre del cliente", "Id Cartelera", "Id del Ticket", "Id del Asiento","Fecha de registro","Forma de pago","Monto","Acciones"]}
+              tableHead={["Id","Nombre del cliente", "Id Cartelera", "Id del Ticket", "Id del Asiento","Fecha de registro","Forma de pago","Monto",
+              isAdmin?
+              "Acciones"
+              : null
+            ]}
               tableData={facturas.map(factura => ([...factura,
                 isAdmin?
                 <> 
