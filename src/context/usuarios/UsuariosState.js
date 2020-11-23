@@ -32,6 +32,7 @@ const UsuariosState = (props) => {
   }
 
  const desloguearUsuario=()=>{
+    db.models.Usuario.logOut()
     dispatch({
       type: "DESLOGUEAR_USUARIO"
     })

@@ -16,7 +16,6 @@ export default (state, action) => {
         usuarios: action.payload
       };
     case "DESLOGUEAR_USUARIO":
-      //console.log(db.modals.Usuario.getLogged())
       return {
         ...state,
         usuarioLogueado: null,

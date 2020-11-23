@@ -8,11 +8,14 @@
      if (!match.length==0) {
        return db.get("usuarioLogueado").push(match).write()
       }
-      
+
      return []
     },
     getLogged(){
       return db.get("usuarioLogueado").value()
+    },
+    logOut(){
+      return db.set("usuarioLogueado",[]).write()
     }
   };
 };
