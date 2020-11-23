@@ -18,13 +18,15 @@ export default function CustomInput(props) {
   const classes = useStyles();
   const {
     formControlProps,
+    name,
     labelText,
     id,
     labelProps,
     inputProps,
     error,
     success,
-    fn
+    fn,
+    onchange
   } = props;
 
   const labelClasses = classNames({
@@ -59,15 +61,12 @@ export default function CustomInput(props) {
           disabled: classes.disabled,
           underline: underlineClasses
         }}
+        onChange={onchange}
         onClick={fn}
+        name={name}
         id={id}
         {...inputProps}
       />
-      {error ? (
-        <Clear className={classes.feedback + " " + classes.labelRootError} />
-      ) : success ? (
-        <Check className={classes.feedback + " " + classes.labelRootSuccess} />
-      ) : null}
     </FormControl>
   );
 }

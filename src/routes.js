@@ -20,7 +20,7 @@ import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 // core components/views for Admin layout
-import UserProfile from "views/UserProfile/UserProfile.js";
+import UserProfile from "views/UserProfile/UserProfile2.js";
 import TableList from "views/TableList/TableList.js";
 import Taquillas from "views/Taquillas/Taquillas.js";
 import Usuarios from 'views/Usuarios/Usuarios.js'

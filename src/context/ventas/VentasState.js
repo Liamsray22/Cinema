@@ -12,9 +12,12 @@ const VentasState = (props) => {
 
   const [state, dispatch] = useReducer(VentasReducer, initialState);
 
+  const agregarFactura = (venta)=>{
+    const factura = db.models.Venta.createVenta(venta)
+  }
+
   const obtenerFacturas = ()=>{
     const facturas = db.models.Venta.getVentas()
-
     dispatch({
       type:"OBTENER_FACTURAS",
       payload: facturas
@@ -37,7 +40,7 @@ const VentasState = (props) => {
         //Fn
         removerFactura,
         obtenerFacturas,
-        // editartFactura
+        agregarFactura
       }}
     >
       {props.children}

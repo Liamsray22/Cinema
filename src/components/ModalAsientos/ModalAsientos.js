@@ -8,8 +8,8 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -41,7 +41,11 @@ export default function ModalAsientos(props) {
       {AsientosData.map((item,index)=>{
         return(
             <div>
-                <img key={index} src={item.img} style={{height:"50px", width:"50px"}} onClick={()=>alert(`Asiento Seleccionado: ${item.numeroAsiento}`)}/>
+                <img key={index} src={item.img} style={{height:"50px", width:"50px"}} onClick={()=>
+                  {
+                    props.setAsiento(item.numeroAsiento)
+                    props.handleClose()
+                  }}/>
                 <center><caption align="bottom">{item.numeroAsiento}</caption></center>
             </div>
         )

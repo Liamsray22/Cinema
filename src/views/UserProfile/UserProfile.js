@@ -1,6 +1,9 @@
-import React from "react";
+import React,{useContext,useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import FormControl from "@material-ui/core/FormControl";
+import Input from "@material-ui/core/Input";
+
 import InputLabel from "@material-ui/core/InputLabel";
 
 import avatar from "assets/img/faces/marc.jpg";
@@ -15,8 +18,8 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import ModalAsientos from "components/ModalAsientos/ModalAsientos.js";
-
-
+// context
+import VentasContext from "context/ventas/VentasContext"
 
 const styles = {
   cardCategoryWhite: {
@@ -40,16 +43,24 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
-  
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
- 
+  const [open, setOpen] = useState(false);
+  const [nombre,setNombre] =useState("");
+  const [apellido,setApellido] =useState("");
+  const [cartelera,setCartelera] =useState();
+  const [asiento,setAsiento] =useState();
+  const [tipoPago,setTipoPago] =useState("");
+  const [monto,setMonto] =useState(0);
+
+  const ventasContext = useContext(VentasContext)
+
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
       <GridContainer>
@@ -99,6 +110,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Nombre"
                     id="nombre"
+                    onChange={(e)=>setNombre(e.target.value)}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -108,6 +120,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Apellido"
                     id="apellido"
+                    onChange={()=>console.log("lel")}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -119,6 +132,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Cartelera"
                     id="cartelera"
+                    onChange={()=>console.log("lel")}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -128,6 +142,7 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Asiento"
                     id="asiento"
+                    onChange={()=>console.log("lel")}
                     fn= {handleOpen}
                     formControlProps={{
                       fullWidth: true
@@ -139,35 +154,33 @@ export default function UserProfile() {
                   <CustomInput
                     labelText="Tipo de Pago"
                     id="tipo-pago"
+                    onChange={()=>console.log("lel")}
                     formControlProps={{
                       fullWidth: true
                     }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
+                <Input
+                  type="text"
+                  id="nombre" 
+                  placeholder="Tu usuario" 
+                  onChange={()=>console.log("lel")}
+                />
+                 <Input
+                  type="text" 
+                  id="nombre" 
+                  placeholder="Tu pass" 
+                  onChange={(e)=>setNombre(e.target.value)}
+                />
                   <CustomInput
                     labelText="Monto"
                     id="monto"
+                    onChange={()=>console.log("lel")}
                     formControlProps={{
                       fullWidth: true
                     }}
                   />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  {/* <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel> */}
-                  {/* <CustomInput
-                    labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 5
-                    }}
-                  /> */}
                 </GridItem>
               </GridContainer>
             </CardBody>
@@ -175,28 +188,6 @@ export default function UserProfile() {
               <Button color="primary">Procesar</Button>
             </CardFooter>
           </Card>
-     
-        {/* <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
-              </p>
-              <Button color="primary" round>
-                Follow
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem> */}
       </GridContainer>
     </div>
   );

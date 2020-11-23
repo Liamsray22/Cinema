@@ -6,7 +6,7 @@ import db from 'db'
 const UsuariosState = (props) => {
   const initialState = {
     usuarios: [],
-    isAuth: false,
+    isAuth: true,
     usuarioLogueado: null,
     error: false,
     isAdmin:null
@@ -16,7 +16,7 @@ const UsuariosState = (props) => {
 
   const loguearUsuario = (usuario)=>{
     const usuarioLogged = db.models.Usuario.findOne(usuario)
-    console.log('Sign In',usuarioLogged.length ==0||usuarioLogged[0].length == 0)
+    console.log('Sign In',usuarioLogged.length==0||usuarioLogged[0].length == 0)
     if(usuarioLogged.length ==0||usuarioLogged[0].length == 0) {
       return dispatch({
         type: "ERROR",

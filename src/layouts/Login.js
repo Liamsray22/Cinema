@@ -1,4 +1,6 @@
 import React,{useContext,useState} from 'react'
+import Footer from 'components/Footer/Footer'
+
 import UsuariosContext from 'context/usuarios/UsuariosContext'
 import "assets/css/login.css";
 
