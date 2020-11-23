@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from 'react'
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,12 +21,19 @@ import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
+//context
+import UsuariosContext from 'context/usuarios/UsuariosContext'
+
 const useStyles = makeStyles(styles);
 
 export default function AdminNavbarLinks() {
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
+
+  const usuariosContext = useContext(UsuariosContext)
+  const {desloguearUsuario} = usuariosContext
+
   const handleClickNotification = event => {
     if (openNotification && openNotification.contains(event.target)) {
       setOpenNotification(null);
@@ -47,6 +54,11 @@ export default function AdminNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+
+  const handleCloseSession = ()=>{
+    setOpenProfile(null);
+    desloguearUsuario()
+  }
   return (
     <div>
       <div className={classes.searchWrapper}>
@@ -66,7 +78,7 @@ export default function AdminNavbarLinks() {
           <Search />
         </Button>
       </div>
-      <Button
+      {/* <Button
         color={window.innerWidth > 959 ? "transparent" : "white"}
         justIcon={window.innerWidth > 959}
         simple={!(window.innerWidth > 959)}
@@ -77,7 +89,7 @@ export default function AdminNavbarLinks() {
         <Hidden mdUp implementation="css">
           <p className={classes.linkText}>Dashboard</p>
         </Hidden>
-      </Button>
+      </Button> */}
       <div className={classes.manager}>
         {/* <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -208,7 +220,7 @@ export default function AdminNavbarLinks() {
                     </MenuItem>
                     <Divider light /> */}
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={handleCloseSession}
                       className={classes.dropdownItem}
                     >
                       Cerrar Sesión

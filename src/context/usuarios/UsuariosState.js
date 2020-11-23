@@ -6,23 +6,36 @@ import db from 'db'
 const UsuariosState = (props) => {
   const initialState = {
     usuarios: [],
-    isAuth: true,
+    isAuth: false,
     usuarioLogueado: null,
+    error: false
   };
 
   const [state, dispatch] = useReducer(UsuariosReducer, initialState);
 
-  const logearUsuario = (usuario)=>{
-    console.log('Sign In',usuario)
+  const loguearUsuario = (usuario)=>{
+    const usuarioLogged = db.models.Usuario.findOne(usuario)
+    console.log('Sign In',usuarioLogged)
+    
+    if(usuarioLogged.length == 0) {
+     return dispatch({
+      type: "ERROR",
+    })
+    }  
     dispatch({
-      type: "LOGEAR_USUARIO",
+      type: "LOGUEAR_USUARIO",
       payload: usuario
+    })
+  }
+
+ const desloguearUsuario=()=>{
+    dispatch({
+      type: "DESLOGUEAR_USUARIO"
     })
   }
 
   const obtenerUsuarios = ()=>{
     const usuarios = db.models.Usuario.findMany()
-    console.log("Get users",usuarios)
     dispatch({
       type:"OBTENER_USUARIOS",
       payload: usuarios
@@ -49,8 +62,10 @@ const UsuariosState = (props) => {
         //State
         isAuth: state.isAuth,
         usuarios: state.usuarios,
+        error: state.error,
         //Fn
-        logearUsuario,
+        loguearUsuario,
+        desloguearUsuario,
         obtenerUsuarios
       }}
     >

@@ -1,53 +1,85 @@
-import React,{useContext,useState,useEffect} from 'react'
+import React,{useContext,useState} from 'react'
 import UsuariosContext from 'context/usuarios/UsuariosContext'
-
 import "assets/css/login.css";
 
 
 function Login() {
-    const usuariosContext = useContext(UsuariosContext)
-    console.log(usuariosContext)
-    
-    const {usuarios, obtenerUsuarios} = usuariosContext
-    useEffect(()=>{
-        obtenerUsuarios()
-    },[])
+    const [datosUsuario,setDatos] = useState({ 
+        nombre:'',
+        password: ''
+    })
 
+    const usuariosContext = useContext(UsuariosContext)
+    const {nombre, password} = datosUsuario
+    const { loguearUsuario, error} = usuariosContext
+
+    const handleChange = (e) => {
+        setDatos({
+          ...datosUsuario,
+          [e.target.name]: e.target.value,
+        });
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        if (nombre.trim() === "" || password.trim() === "") {
+          return;
+        }
+        loguearUsuario(datosUsuario);
+      };
 
     return (
-        <html>
+        <>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                     
         <div id="login">
-            <h3 class="text-center text-white pt-5">Iniciar Sesion</h3>
-            <div class="container">
-                <div id="login-row" class="row justify-content-center align-items-center">
-                    <div id="login-column" class="col-md-6">
-                        <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
-                                <h3 class="text-center text-info">Iniciar Sesion</h3>
-                                <div class="form-group">
-                                    <label for="username" class="text-info">Usuario:</label><br/>
-                                    <input type="text" name="username" id="username" class="form-control"/>
+            <h3 className="text-center text-white pt-5">Iniciar Sesion</h3>
+            <div className="container">
+                <div id="login-row" className="row justify-content-center align-items-center">
+                    <div id="login-column" className="col-md-6">
+                        <div id="login-box" className="col-md-12">
+                        <form id="login-form" className="form" onSubmit={handleSubmit}>
+                                <h3 className="text-center text-info">Iniciar Sesion</h3>
+                                <div className="form-group">
+                                    <label htmlFor="nombre" className="text-info">Usuario:</label><br/>
+                                    <input 
+                                        type="text" 
+                                        name="nombre" 
+                                        id="nombre" 
+                                        placeholder="Tu usuario" 
+                                        className="form-control"
+                                        onChange={handleChange}
+                                    />
                                 </div>
-                                <div class="form-group">
-                                    <label for="password" class="text-info">Clave:</label><br/>
-                                    <input type="text" name="password" id="password" class="form-control"/>
+                                <div className="form-group">
+                                    <label htmlFor="password" className="text-info">Contraseña:</label><br/>
+                                    <input 
+                                        type="password" 
+                                        name="password" 
+                                        id="password" 
+                                        placeholder="Tu contraseña" 
+                                        className="form-control"
+                                        onChange={handleChange}
+                                    />
                                 </div>
-                                <div class="form-group">
-                                    <label for="remember-me" class="text-info"><span>Recordarme</span> <span><input id="remember-me" name="remember-me" type="checkbox"/></span></label><br/>
-                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="Entrar"/>
+                                <div className="form-group">
+                                    <input 
+                                        type="submit" 
+                                        name="submit" 
+                                        className="btn btn-info btn-lg" 
+                                        value="Iniciar Sesion"
+                                    />
                                 </div>
-
+                                {error ? <p className="alert alert-danger text-center text-uppercase p3">Datos erroneos</p> : null}
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </html>
+    </>
     )
 }
 
