@@ -13,7 +13,11 @@ export default function SalasState(props) {
       const [state, dispatch] = useReducer(SalasReducer, initialState);
 
     return (
-       <SalasContext.Provider>
+       <SalasContext.Provider 
+        value={{
+            salas: state.salas
+        }}
+       >
            {props.children}
        </SalasContext.Provider>
     )

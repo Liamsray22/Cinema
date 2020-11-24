@@ -1,19 +1,10 @@
 /*eslint-disable*/
 import React from "react";
-import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
 import 'assets/css/footer.css'
-// core components
-import styles from "assets/jss/material-dashboard-react/components/footerStyle.js";
-
-
-const useStyles = makeStyles(styles);
 
 export default function Footer(props) {
-  const classes = useStyles();
   return (
     <div>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
@@ -30,12 +21,12 @@ export default function Footer(props) {
             </div>
 
             <div class="col-xs-6 col-md-3">
-              <h6>Menu</h6>
+              {/* <h6>Menu</h6>
                 <ul class="footer-links">
                   <li><a href="http://localhost:3000/admin/dashboard">Facturacion</a></li>
                   <li><a href="http://localhost:3000/admin/taquillas">Taquillas</a></li>
                   <li><a href="http://localhost:3000/admin/ver-facturas">Ver Facturas</a></li>                
-                </ul>
+                </ul> */}
             </div>
 
             <div class="col-xs- col-md-3">

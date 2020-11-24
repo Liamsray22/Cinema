@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext,useEffect} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -8,6 +8,9 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+//context
+import CartelerasContext from 'context/carteleras/CartelerasContext'
+
 
 const styles = {
   cardCategoryWhite: {
@@ -43,9 +46,16 @@ const useStyles = makeStyles(styles);
 const currentDate = new Date();
 export default function TableList() {
   const classes = useStyles();
+
+  const cartelerasContext = useContext(CartelerasContext)
+  const {carteleras,obtenerCarteleras} = cartelerasContext;
+
+  useEffect(()=>{
+    obtenerCarteleras()
+  },[])
+
   return (
     <GridContainer>
-      {/* <GridItem xs={12} sm={12} md={12}> */}
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Taquillas</h4>
@@ -56,13 +66,8 @@ export default function TableList() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Pelicula", "Fecha de la Funcion", "Establecimiento", "Duracion","Hora de Inicio","Hora de Fin"]}
-              tableData={[
-                ["Terminator","28/08/2020","E&J CINEMA","2.5 horas",`20:00`,"22:30"],
-                ["Terminator","28/08/2020","E&J CINEMA","2.5 horas",`20:00`,"22:30"],
-                ["Terminator","28/08/2020","E&J CINEMA","2.5 horas",`20:00`,"22:30"],
-                ["Terminator","28/08/2020","E&J CINEMA","2.5 horas",`20:00`,"22:30"],
-              ]}
+              tableHead={["ID","Pelicula", "Fecha de la Funcion", "Establecimiento", "Duracion","Hora de Inicio","Hora de Fin","Sala"]}
+              tableData={carteleras}
             />
           </CardBody>
         </Card>

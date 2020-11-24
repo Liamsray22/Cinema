@@ -203,7 +203,7 @@ export default function UserProfile() {
                         underline: underlineClasses
                       }}
                       name="cartelera"
-                      type="text"
+                      type="number"
                       onChange={(e)=>setCartelera(e.target.value)}
                     />
                   </FormControl>
@@ -269,7 +269,7 @@ export default function UserProfile() {
                         underline: underlineClasses
                       }}
                       name="monto"
-                      type="text"
+                      type="number"
                       onChange={(e)=>setMonto(e.target.value)}
                     />
                   </FormControl>

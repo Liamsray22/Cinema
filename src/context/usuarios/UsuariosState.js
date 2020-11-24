@@ -16,7 +16,6 @@ const UsuariosState = (props) => {
 
   const loguearUsuario = (usuario)=>{
     const usuarioLogged = db.models.Usuario.findOne(usuario)
-    console.log('Sign In',usuarioLogged.length==0||usuarioLogged[0].length == 0)
     if(usuarioLogged.length ==0||usuarioLogged[0].length == 0) {
       return dispatch({
         type: "ERROR",
