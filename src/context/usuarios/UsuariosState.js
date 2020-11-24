@@ -6,7 +6,7 @@ import db from 'db'
 const UsuariosState = (props) => {
   const initialState = {
     usuarios: [],
-    isAuth: true,
+    isAuth: false,
     usuarioLogueado: null,
     error: false,
     isAdmin:null

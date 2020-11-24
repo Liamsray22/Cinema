@@ -1,7 +1,10 @@
 export default (state, action) => {
     switch (action.type) {
-        case 'ACTION_TYPE':
-            return 
+        case 'OBTENER_SALA':
+            return{
+                ...state,
+                salaSeleccionada: action.payload
+            }
         default:
             return state
     }

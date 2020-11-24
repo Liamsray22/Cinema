@@ -1,7 +1,9 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {AsientosData} from '../Data/asientosData'
 import Modal from '@material-ui/core/Modal';
+//context
+import SalasContext from 'context/salas/SalasContext'
 
 
 function getModalStyle() {
@@ -29,25 +31,31 @@ const useStyles = makeStyles((theme) => ({
 export default function ModalAsientos(props) {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
+
+  const salasContext = useContext(SalasContext)
+  const {salaSeleccionada:{asientos}} = salasContext
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Asientos disponibles</h2>
       <p id="simple-modal-description">
         <div style={{display:"flex", flexWrap:"wrap"}}>
-      {AsientosData.map((item,index)=>{
-        return(
-            <div>
-                <img key={index} src={item.img} style={{height:"50px", width:"50px"}} onClick={()=>
-                  {
-                    props.setAsiento(item.numeroAsiento)
-                    props.handleClose()
-                  }}/>
-                <center><caption align="bottom">{item.numeroAsiento}</caption></center>
-            </div>
-        )
-        })
-      }
-    </div>
+            {asientos ? asientos.map((asiento)=>{
+                if (asiento.disponible){
+                  return(
+                    <div>
+                      <img key={asiento.id} src={asiento.img} style={{height:"50px", width:"50px"}} onClick={()=>
+                        {
+                          props.setAsiento(asiento.id)
+                          props.handleClose()
+                        }}/>
+                      <center><caption align="bottom">{asiento.id}</caption></center>
+                    </div>
+                  )
+                } 
+              }): <p>No hay asientos disponibles</p>
+            }
+        </div>
       </p>
     </div>
   );

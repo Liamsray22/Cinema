@@ -1,13 +1,14 @@
-import React,{useContext,useState} from "react";
+import React,{useContext,useState,useEffect} from "react";
+import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
-
 import InputLabel from "@material-ui/core/InputLabel";
 
-import avatar from "assets/img/faces/marc.jpg";
-import CardAvatar from "components/Card/CardAvatar.js";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -20,6 +21,11 @@ import CardFooter from "components/Card/CardFooter.js";
 import ModalAsientos from "components/ModalAsientos/ModalAsientos.js";
 // context
 import VentasContext from "context/ventas/VentasContext"
+import SalasContext from "context/salas/SalasContext"
+import CartelerasContext from 'context/carteleras/CartelerasContext'
+
+import db from 'db'
+import {nanoid} from 'nanoid'
 
 const styles = {
   cardCategoryWhite: {
@@ -42,17 +48,30 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function UserProfile() {
+export default function UserProfile(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [nombre,setNombre] =useState("");
   const [apellido,setApellido] =useState("");
-  const [cartelera,setCartelera] =useState();
-  const [asiento,setAsiento] =useState();
+  const [cartelera,setCartelera] =useState(0);
+  const [asiento,setAsiento] =useState(0);
   const [tipoPago,setTipoPago] =useState("");
   const [monto,setMonto] =useState(0);
 
+  const [error,setError]=useState(false);
+  const [agregado,setAgregado] = useState(false)
+
   const ventasContext = useContext(VentasContext)
+  const cartelerasContext = useContext(CartelerasContext)
+  const salasContext = useContext(SalasContext)
+
+  const {agregarFactura}=ventasContext
+  const {carteleras,obtenerCarteleras} = cartelerasContext;
+  const {salaSeleccionada,getSalaPorId} = salasContext
+
+  useEffect(()=>{
+    obtenerCarteleras()
+  },[])
 
   const handleOpen = () => {
     setOpen(true);
@@ -61,6 +80,46 @@ export default function UserProfile() {
     setOpen(false);
   };
 
+  const underlineClasses = classNames({
+    [classes.underline]: true
+  });
+
+  const handleSubmit=()=> {
+    if(nombre.trim()=="" || apellido.trim()=="" || cartelera.length<=0 ||
+      asiento.length<=0 || tipoPago.trim()=="" || monto.length<=0) {
+        db.models.Sala.toggleDisponible(salaSeleccionada.id,asiento)
+        setError(true)
+        setTimeout(()=>{
+          setError(false)
+        }, 3000)
+        return;
+    }
+    const currentDate = new Date();
+    const factura = [`${nombre} ${apellido}`, Number(cartelera), nanoid(2),asiento,
+    `${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,tipoPago,Number(monto)]
+
+    agregarFactura(factura)
+    
+    setAgregado(true)
+    setTimeout(() =>{
+      setAgregado(false)
+    }, 3000)
+
+    setNombre("")
+    setApellido("")
+    setCartelera(0)
+    setAsiento(0)
+    setTipoPago("")
+    setMonto(0)
+  }
+
+  const handleCartelera =(e)=>{
+    const salaId = db.models.Cartelera.findOne(e.target.value)[7]
+    getSalaPorId(salaId)
+    setCartelera(e.target.value)
+   
+  }
+  
   return (
     <div>
       <GridContainer>
@@ -72,121 +131,195 @@ export default function UserProfile() {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText="E&J CINEMA"
-                    id="company-disabled"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      disabled: true
-                    }}
-                  />
+                   <FormControl
+                    fullWidth= {true}
+                    className={classes.formControl}
+                   >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Establecimiento
+                      </InputLabel>
+                    <Input
+                      classes={{
+                        root: classes.marginTop,
+                        disabled: classes.disabled,
+                        underline: underlineClasses
+                      }}
+                      value={"E&J CINEMA"}
+                      disabled={true}
+                    />
+                  </FormControl>
+                
                 </GridItem>
-                {/* <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Nombre del Cliente"
-                    id="username"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem> */}
                 <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Calle Jose Contreras, Distrito Nacional"
-                    id="direccion"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      disabled: true
-                    }}
-                  />
+                <FormControl
+                    fullWidth= {true}
+                    className={classes.formControl}
+                >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Direccion
+                      </InputLabel>
+                    <Input
+                      classes={{
+                        root: classes.marginTop,
+                        disabled: classes.disabled,
+                        underline: underlineClasses
+                      }}
+                      value={"Calle Jose Contreras, Distrito Nacional"}
+                      disabled={true}
+                    />
+                  </FormControl>
+                
                 </GridItem>
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Nombre"
-                    id="nombre"
-                    onChange={(e)=>setNombre(e.target.value)}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+                  <FormControl
+                    fullWidth= {true}
+                    className={classes.formControl}
+                  >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Nombre
+                      </InputLabel>
+                    <Input
+                      classes={{
+                        root: classes.marginTop,
+                        disabled: classes.disabled,
+                        underline: underlineClasses
+                      }}
+                      name="nombre"
+                      type="text"
+                      onChange={(e)=>setNombre(e.target.value)}
+                    />
+                  </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Apellido"
-                    id="apellido"
-                    onChange={()=>console.log("lel")}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+                <FormControl
+                    fullWidth= {true}
+                    className={classes.formControl}
+                  >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Apellido
+                      </InputLabel>
+                    <Input
+                      classes={{
+                        root: classes.marginTop,
+                        disabled: classes.disabled,
+                        underline: underlineClasses
+                      }}
+                      name="apellido"
+                      type="text"
+                      onChange={(e)=>setApellido(e.target.value)}
+                    />
+                  </FormControl>
                 </GridItem>
               </GridContainer>
               <GridContainer>
               <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Cartelera"
-                    id="cartelera"
-                    onChange={()=>console.log("lel")}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+
+              <FormControl
+                  fullWidth= {true}
+                  className={classes.formControl}
+              >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Cartelera
+                      </InputLabel>
+
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={cartelera}
+                        onChange={(e)=>handleCartelera(e)}
+                      >
+                        {carteleras? 
+                          carteleras.map((cartelera)=>(
+                          <MenuItem value={cartelera[0]}>{cartelera[0]}</MenuItem>
+                        ))
+                        :<MenuItem value="" disabled>No hay carteleras</MenuItem>  }
+                      </Select>
+                  </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Asiento"
-                    id="asiento"
-                    onChange={()=>console.log("lel")}
-                    fn= {handleOpen}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                  <ModalAsientos open={open} handleClose={handleClose}/>
+                  <FormControl
+                    fullWidth= {true}
+                    className={classes.formControl}
+                  >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Asiento
+                      </InputLabel>
+                    <Input
+                      classes={{
+                        root: classes.marginTop,
+                        disabled: classes.disabled,
+                        underline: underlineClasses
+                      }}
+                      onClick={handleOpen}
+                      value={asiento}
+                    />
+                  </FormControl>
+                  <ModalAsientos open={open} handleClose={handleClose} setAsiento={setAsiento}/>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Tipo de Pago"
-                    id="tipo-pago"
-                    onChange={()=>console.log("lel")}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+                <FormControl
+                    fullWidth= {true}
+                    className={classes.formControl}
+                  >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Tipo de pago
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={tipoPago}
+                        onChange={(e)=>setTipoPago(e.target.value)}
+                      >
+                         <MenuItem value="Efectivo">Efectivo</MenuItem>
+                         <MenuItem value="Tarjeta">Tarjeta</MenuItem>
+                      </Select>
+                  </FormControl>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                <Input
-                  type="text"
-                  id="nombre" 
-                  placeholder="Tu usuario" 
-                  onChange={()=>console.log("lel")}
-                />
-                 <Input
-                  type="text" 
-                  id="nombre" 
-                  placeholder="Tu pass" 
-                  onChange={(e)=>setNombre(e.target.value)}
-                />
-                  <CustomInput
-                    labelText="Monto"
-                    id="monto"
-                    onChange={()=>console.log("lel")}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
+                <FormControl
+                    fullWidth= {true}
+                    className={classes.formControl}
+                  >
+                     <InputLabel
+                        className={classes.labelRoot}
+                      >
+                        Monto
+                      </InputLabel>
+                    <Input
+                      classes={{
+                        root: classes.marginTop,
+                        disabled: classes.disabled,
+                        underline: underlineClasses
+                      }}
+                      name="monto"
+                      type="number"
+                      onChange={(e)=>setMonto(e.target.value)}
+                    />
+                  </FormControl>
                 </GridItem>
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Procesar</Button>
+              <Button color="primary" onClick={handleSubmit}>Procesar</Button>
             </CardFooter>
+            {error ? <p className="alert alert-danger text-center text-uppercase p3">Debe completar todos los campos</p> : null}
+            {agregado ? <p className="alert alert-info text-center text-uppercase p3">Venta registrada exitosamente</p> : null}
           </Card>
       </GridContainer>
     </div>
