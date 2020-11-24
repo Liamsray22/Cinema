@@ -4,7 +4,7 @@ export default{
   usuarioLogueado:[],
   usuario:
     [
-      [1,"admin","1234","admin",true],
+      [1,"admin","admin123","admin",true],
       [2,"Marcos","1234","employee",false],
       [3,"Polo","1234","employee",false],
       [4,"Julio","1234","employee",false]

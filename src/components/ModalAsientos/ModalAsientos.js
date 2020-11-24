@@ -1,6 +1,6 @@
 import React,{useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {AsientosData} from '../Data/asientosData'
+// import {AsientosData} from '../Data/asientosData'
 import Modal from '@material-ui/core/Modal';
 //context
 import SalasContext from 'context/salas/SalasContext'

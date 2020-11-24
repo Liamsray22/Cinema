@@ -87,7 +87,6 @@ export default function UserProfile(props) {
   const handleSubmit=()=> {
     if(nombre.trim()=="" || apellido.trim()=="" || cartelera.length<=0 ||
       asiento.length<=0 || tipoPago.trim()=="" || monto.length<=0) {
-        db.models.Sala.toggleDisponible(salaSeleccionada.id,asiento)
         setError(true)
         setTimeout(()=>{
           setError(false)
@@ -98,6 +97,7 @@ export default function UserProfile(props) {
     const factura = [`${nombre} ${apellido}`, Number(cartelera), nanoid(2),asiento,
     `${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,tipoPago,Number(monto)]
 
+    db.models.Sala.toggleDisponible(salaSeleccionada.id,asiento)
     agregarFactura(factura)
     
     setAgregado(true)
