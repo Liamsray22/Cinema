@@ -18,6 +18,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import ModalAsientos from "components/ModalAsientos/ModalAsientos.js";
 // context
 import VentasContext from "context/ventas/VentasContext"
+import {nanoid} from 'nanoid'
 
 const styles = {
   cardCategoryWhite: {
@@ -75,6 +76,12 @@ export default function UserProfile() {
         }, 3000)
         return;
     }
+    const currentDate = new Date();
+    const factura = [`${nombre} ${apellido}`, Number(cartelera), nanoid(2),asiento,
+    `${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,tipoPago,Number(monto)]
+
+    agregarFactura(factura)
+  
   }
 
   return (

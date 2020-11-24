@@ -1,12 +1,11 @@
-import * as nanoid from 'nanoid'
+import {nanoid} from 'nanoid'
 
  const createVentasModel = (db) => {
   return {
       createVenta(venta){
         console.log("creando factura...",venta);
-        // const newVenta = [nanoid(),...venta]
-        // db.get("factura").push(newVenta).write()
-        // return newVenta
+        const newVenta = [nanoid(2),...venta]
+        return db.get("factura").push(newVenta).write()
       },
       getVentas(){
        return db.get("factura").value()
