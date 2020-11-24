@@ -1,10 +1,13 @@
-import React,{useContext,useState} from "react";
+import React,{useContext,useState,useEffect} from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
+
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -18,6 +21,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import ModalAsientos from "components/ModalAsientos/ModalAsientos.js";
 // context
 import VentasContext from "context/ventas/VentasContext"
+import CartelerasContext from 'context/carteleras/CartelerasContext'
 import {nanoid} from 'nanoid'
 
 const styles = {
@@ -41,7 +45,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function UserProfile() {
+export default function UserProfile(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [nombre,setNombre] =useState("");
@@ -52,9 +56,17 @@ export default function UserProfile() {
   const [monto,setMonto] =useState(0);
 
   const [error,setError]=useState(false);
+  const [agregado,setAgregado] = useState(false)
 
   const ventasContext = useContext(VentasContext)
+  const cartelerasContext = useContext(CartelerasContext)
+
+  const {carteleras,obtenerCarteleras} = cartelerasContext;
   const {agregarFactura}=ventasContext
+
+  useEffect(()=>{
+    obtenerCarteleras()
+  },[])
 
   const handleOpen = () => {
     setOpen(true);
@@ -81,9 +93,24 @@ export default function UserProfile() {
     `${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`,tipoPago,Number(monto)]
 
     agregarFactura(factura)
-  
+    
+    setAgregado(true)
+    setTimeout(() =>{
+      setAgregado(false)
+    }, 3000)
+
+    setNombre("")
+    setApellido("")
+    setCartelera(0)
+    setAsiento(0)
+    setTipoPago("")
+    setMonto(0)
   }
 
+  const handleCartelera =(e)=>{
+    setCartelera(e.target.value)
+  }
+  
   return (
     <div>
       <GridContainer>
@@ -187,6 +214,7 @@ export default function UserProfile() {
               </GridContainer>
               <GridContainer>
               <GridItem xs={12} sm={12} md={4}>
+
               <FormControl
                   fullWidth= {true}
                   className={classes.formControl}
@@ -196,7 +224,21 @@ export default function UserProfile() {
                       >
                         Cartelera
                       </InputLabel>
-                    <Input
+
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={cartelera}
+                        onChange={(e)=>handleCartelera(e)}
+                      >
+                        {carteleras? 
+                          carteleras.map((cartelera)=>(
+                          <MenuItem value={cartelera[0]}>{cartelera[0]}</MenuItem>
+                        ))
+                        :<MenuItem value="" disabled>No hay carteleras</MenuItem>  }
+                      </Select>
+
+                    {/* <Input
                       classes={{
                         root: classes.marginTop,
                         disabled: classes.disabled,
@@ -205,8 +247,10 @@ export default function UserProfile() {
                       name="cartelera"
                       type="number"
                       onChange={(e)=>setCartelera(e.target.value)}
-                    />
+                    /> */}
                   </FormControl>
+
+
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <FormControl
@@ -280,6 +324,7 @@ export default function UserProfile() {
               <Button color="primary" onClick={handleSubmit}>Procesar</Button>
             </CardFooter>
             {error ? <p className="alert alert-danger text-center text-uppercase p3">Debe completar todos los campos</p> : null}
+            {agregado ? <p className="alert alert-info text-center text-uppercase p3">Venta registrada exitosamente</p> : null}
           </Card>
       </GridContainer>
     </div>
