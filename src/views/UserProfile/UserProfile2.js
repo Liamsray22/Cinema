@@ -21,7 +21,10 @@ import CardFooter from "components/Card/CardFooter.js";
 import ModalAsientos from "components/ModalAsientos/ModalAsientos.js";
 // context
 import VentasContext from "context/ventas/VentasContext"
+import SalasContext from "context/salas/SalasContext"
 import CartelerasContext from 'context/carteleras/CartelerasContext'
+
+import db from 'db'
 import {nanoid} from 'nanoid'
 
 const styles = {
@@ -60,9 +63,11 @@ export default function UserProfile(props) {
 
   const ventasContext = useContext(VentasContext)
   const cartelerasContext = useContext(CartelerasContext)
+  const salasContext = useContext(SalasContext)
 
-  const {carteleras,obtenerCarteleras} = cartelerasContext;
   const {agregarFactura}=ventasContext
+  const {carteleras,obtenerCarteleras} = cartelerasContext;
+  const {getSalaPorId} = salasContext
 
   useEffect(()=>{
     obtenerCarteleras()
@@ -108,6 +113,8 @@ export default function UserProfile(props) {
   }
 
   const handleCartelera =(e)=>{
+    const salaId = db.models.Cartelera.findOne(e.target.value)[7]
+    getSalaPorId(salaId)
     setCartelera(e.target.value)
   }
   

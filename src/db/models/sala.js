@@ -7,7 +7,7 @@ import * as nanoid from 'nanoid'
     },
     findOne(id){  
       return db.get("sala").find({id}).value()
-    }
+    },
   };
 };
 

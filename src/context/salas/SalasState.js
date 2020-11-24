@@ -7,15 +7,19 @@ export default function SalasState(props) {
 
     const initialState = {
         salas:[],
-        salaSeleccionada: null,
+        salaSeleccionada: [],
       };
     
       const [state, dispatch] = useReducer(SalasReducer, initialState);
-
+    
+      const getSalaPorId =(idSala)=>{
+       console.log('Sala:',db.models.Sala.findOne(idSala))
+      }
     return (
        <SalasContext.Provider 
         value={{
-            salas: state.salas
+            salas: state.salas,
+            getSalaPorId
         }}
        >
            {props.children}

@@ -4,6 +4,9 @@ import * as nanoid from 'nanoid'
   return {
     findMany(){
      return db.get('cartelera').value()
+    },
+    findOne(id){
+      return db.get('cartelera').find((cartelera)=>cartelera[0]==id).value()
     }
   };
 };
