@@ -58,9 +58,9 @@ export default function TableList() {
     <GridContainer>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Taquillas</h4>
+            <h4 className={classes.cardTitleWhite}>Carteleras</h4>
             <p className={classes.cardCategoryWhite}>
-              Listado de taquillas
+              Listado de Carteleras
             </p>
           </CardHeader>
           <CardBody>
