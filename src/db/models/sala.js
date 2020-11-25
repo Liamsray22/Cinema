@@ -1,5 +1,3 @@
-import * as nanoid from 'nanoid'
-
  const createSalaModel = (db) => {
   return {
     findMany(){
@@ -14,7 +12,6 @@ import * as nanoid from 'nanoid'
       newAsientos = newAsientos.map(asiento=>(
       asiento.id == asientoId? {id:asiento.id,disponible:!asiento.disponible, img: asiento.img} : asiento
      ))
-
      return db.get('sala').find((sala)=>sala.id == id).assign({asientos:newAsientos}).write()
     }
   };
