@@ -1,9 +1,7 @@
 import React,{useContext,useState} from 'react'
 import Footer from 'components/Footer/Footer'
-
 import UsuariosContext from 'context/usuarios/UsuariosContext'
 import "assets/css/login.css";
-
 
 function Login() {
     const [datosUsuario,setDatos] = useState({ 
@@ -13,7 +11,7 @@ function Login() {
 
     const usuariosContext = useContext(UsuariosContext)
     const {nombre, password} = datosUsuario
-    const { loguearUsuario, error,isAdmin,usuarioLogueado} = usuariosContext
+    const { loguearUsuario, error} = usuariosContext
 
     const handleChange = (e) => {
         setDatos({
@@ -28,8 +26,6 @@ function Login() {
           return;
         }
         loguearUsuario(datosUsuario);
-        console.log('login',isAdmin)
-        console.log('Login',usuarioLogueado)
       };
 
     return (

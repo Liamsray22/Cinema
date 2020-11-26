@@ -3,7 +3,7 @@
     findMany(){
       return db.get("sala").value()
     },
-    findOne(id){  
+    findOne(id){
       return db.get("sala").find({id}).value()
     },
     toggleDisponible(id,asientoId){

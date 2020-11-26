@@ -5,7 +5,6 @@ import Modal from '@material-ui/core/Modal';
 //context
 import SalasContext from 'context/salas/SalasContext'
 
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
