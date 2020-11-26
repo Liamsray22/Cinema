@@ -1,7 +1,6 @@
 /*eslint-disable*/
 import React from "react";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import 'assets/css/footer.css'
 
 export default function Footer(props) {
@@ -20,14 +19,7 @@ export default function Footer(props) {
                 administracion de tickets del establecimiento cinematografico E&J CINEMA</p>
             </div>
 
-            <div class="col-xs-6 col-md-3">
-              {/* <h6>Menu</h6>
-                <ul class="footer-links">
-                  <li><a href="http://localhost:3000/admin/dashboard">Facturacion</a></li>
-                  <li><a href="http://localhost:3000/admin/taquillas">Taquillas</a></li>
-                  <li><a href="http://localhost:3000/admin/ver-facturas">Ver Facturas</a></li>                
-                </ul> */}
-            </div>
+            <div class="col-xs-6 col-md-3"></div>
 
             <div class="col-xs- col-md-3">
                 <h6>Certificaciones NORTIC</h6>
