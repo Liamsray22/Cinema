@@ -83,6 +83,11 @@ function Login() {
                 </div>
             </div>
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Footer/>
     </>
     )
 }

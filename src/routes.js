@@ -29,8 +29,8 @@ const isAdmin =true
 
 const dashboardRoutes = [
   {
-    path: "/taquillas",
-    name: "Taquillas",
+    path: "/carteleras",
+    name: "Carteleras",
     icon: ConfirmationNumberIcon,
     component:  Taquillas,
     layout: "/admin"
